@@ -10,5 +10,10 @@ class AlarmReciever: BroadcastReceiver() {
         val number = intent?.getStringExtra("number")
         val message = intent?.getStringExtra("message")
         Toast.makeText(context, "$number:$message", Toast.LENGTH_SHORT).show()
+        val serviceIntent = Intent(context, AwtyService::class.java).apply {
+            putExtra("number", number)
+            putExtra("message", message)
+        }
+        context?.startService(serviceIntent)
     }
 }
